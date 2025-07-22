@@ -1,50 +1,39 @@
+````java
 package cl.kibernumacademy.servicio;
 import cl.kibernumacademy.modelo.Cancha;
 import cl.kibernumacademy.modelo.Reserva;
 import java.util.*;
 
 
-public class GestorReservas{
-
-    private final RepositorioReservas repositorio;
-
-    public GestorReservas(RepositorioReservas repositorio) {
-        this.repositorio = repositorio;
-    }
+public class GestorReservas implements RepositorioReservas{
 
     // Atributos
     private List<Cancha> canchas;
-    //private List<Reserva> reservas;
+    private List<Reserva> reservas;
 
     // Constructor
-    /*public GestorReservas() {
+    public GestorReservas() {
         this.canchas = new ArrayList<>();
         this.reservas = new ArrayList<>();
-    }*/
+    }
 
     public List<Cancha> getCanchas() {
         return List.copyOf(canchas);
     }
 
     public List<Reserva> getReservas() {
-        //return List.copyOf(reservas);
-        return repositorio.obtener();
+        return List.copyOf(reservas);
     }
     
     // Métodos para registrar canchas, crear reservas, cancelar reservas, etc.
-    public boolean registrarCancha(Cancha cancha) {
-
-        if (cancha.getNombre() == null  || cancha.getTipoDeporte() == null) {
-            throw new IllegalArgumentException("Nombre o tipo de deporte son valores invalidos");
-        }
+    public void registrarCancha(Cancha cancha) {
         canchas.add(cancha);
-        return true;
     }
 
     public void crearReserva(Reserva reserva) {
         int idCancha = reserva.getIdCancha();
 
-        repositorio.obtener().stream()
+        reservas.stream()
             // Filtrar reservas existentes para la misma cancha, fecha y hora
             .filter(r -> 
                 r.getIdCancha() == idCancha 
@@ -58,26 +47,24 @@ public class GestorReservas{
                 throw new IllegalArgumentException("La cancha ya está reservada en este horario");
             });
         
-        //reservas.add(reserva);
-        repositorio.guardar(reserva);
-        
+        reservas.add(reserva);
+
     }
 
     public void cancelarReserva(Reserva reserva) {
 
-        repositorio.obtener().stream()
+        reservas.stream()
             // Filtrar reservas para encontrar la que coincide con la reserva a cancelar
             .filter(r -> r.getId() == reserva.getId())
             // Encontrar la primera coincidencia
             .findFirst()
             // Si se encuentra, eliminarla de la lista de reservas
-            .ifPresent(r -> repositorio.eliminar(reserva));
-           // repositorio.eliminar(reserva);
-            
+            .ifPresent(r -> reservas.remove(r));
+        
     }   
 
     public long calcularReservasPorDia(String fecha){
-        return repositorio.obtener().stream()
+        return reservas.stream()
             .filter(r -> r.getFecha().equals(fecha))
             .count();
     }

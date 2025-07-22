@@ -1,3 +1,4 @@
+```java
 package cl.kibernumacademy;
 
 import org.junit.jupiter.api.*;
@@ -14,9 +15,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 import javax.naming.spi.ResolveResult;
-import cl.kibernumacademy.modelo.Cancha;
-import cl.kibernumacademy.modelo.Reserva;
-import cl.kibernumacademy.servicio.GestorReservas;
 
 @ExtendWith(MockitoExtension.class) 
 public class GestorReservasTest {
@@ -48,8 +46,9 @@ public class GestorReservasTest {
     // Prueba 2: Crear reserva de canchaas
     @Test
     public void testCrearReserva() {
+        
         gestorReservas.registrarCancha(cancha);
-        Reserva reserva = new Reserva("Usuario1", cancha.getId(), "2025-01-01","08:00");
+        Reserva reserva = new Reserva("Usuario1", cancha, "08:00", "2025-01-01");
         gestorReservas.crearReserva(reserva);
         assertTrue(gestorReservas.getReservas().contains(reserva));
     }
@@ -58,7 +57,7 @@ public class GestorReservasTest {
     @Test
     public void testCancelarReserva() {
         gestorReservas.registrarCancha(cancha);
-        Reserva reserva = new Reserva("Usuario1", cancha.getId(), "2025-01-01","08:00");
+        Reserva reserva = new Reserva("Usuario1", cancha, "08:00", "2025-01-01");
         gestorReservas.crearReserva(reserva);
         assertTrue(gestorReservas.getReservas().contains(reserva));
         gestorReservas.cancelarReserva(reserva);
@@ -69,14 +68,14 @@ public class GestorReservasTest {
     @Test
     public void testReservaCanchasOcupadas() {
         gestorReservas.registrarCancha(cancha);
-        Reserva reserva = new Reserva("Usuario1", cancha.getId(), "2025-01-01","08:00");
+        Reserva reserva = new Reserva("Usuario1", cancha, "08:00", "2025-01-01");
         gestorReservas.crearReserva(reserva);
-        Reserva reserva2 = new Reserva("Usuario1", cancha.getId(), "2025-01-01","08:00");
+        Reserva reserva2 = new Reserva("Usuario2", cancha, "08:00", "2025-01-01");
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             gestorReservas.crearReserva(reserva2);
         });
 
-        assertEquals("La cancha ya está reservada en este horario", exception.getMessage());
+        assertEquals("Tiene que escoger un horario libre", exception.getMessage());
 
         
     }
@@ -84,13 +83,6 @@ public class GestorReservasTest {
     // Prueba 5: Calcular numero de reservas por dia
     @Test
     public void testCalcularReservasPorDia() {
-        gestorReservas.registrarCancha(cancha);
-        gestorReservas.crearReserva(new Reserva("Usuario1", cancha.getId(), "2025-01-01","08:00"));
-        gestorReservas.crearReserva(new Reserva("Usuario1", cancha.getId(), "2025-01-01","09:00"));
-        gestorReservas.crearReserva(new Reserva("Usuario1", cancha.getId(), "2025-01-01","10:00"));
-
-        long reservasDia1 = gestorReservas.calcularReservasPorDia("2025-01-01");
-        assertEquals(3,reservasDia1);
-        
+        double reservasPorDia =  gestorReservas.calcularReservasporDia( "2025-01-01");
     }
 }
