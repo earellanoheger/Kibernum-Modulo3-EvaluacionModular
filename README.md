@@ -12,6 +12,7 @@
 
 ## Gestor de Productos con JUnit 
 
+### Actividad 1: : TDD y pruebas unitarias
 ### RED
 Test en zona roja
 
@@ -27,13 +28,16 @@ tests en zona verde
 
 Código fuente en zona verde
 
-[Código Zona verde](./src/main/java/cl/kibernumacademy/servicio/GestorReservaGreen.md)
+[Código Zona verde](./src/main/java/cl/kibernumacademy/servicio/GestorReservasGreen.md)
 
 
 ### REFACTOR
 tests
 
-![REFACTOR](img/test-result-refactor.png)
+![REFACTOR](img/REFACTOR.png)
 
 código refactorizado
-[Código refactor](./src/main/java/cl/kibernumacademy/servicio/GestorReservaRefactor.md)
+[Código refactor](./src/main/java/cl/kibernumacademy/servicio/GestorReservasRefactor.md)
+
+
+### Actividad 2:
