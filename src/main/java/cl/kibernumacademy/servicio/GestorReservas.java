@@ -4,7 +4,7 @@ import cl.kibernumacademy.modelo.Reserva;
 import java.util.*;
 
 
-public class GestorReservas {
+public class GestorReservas implements RepositorioReservas{
 
     // Atributos
     private List<Cancha> canchas;
