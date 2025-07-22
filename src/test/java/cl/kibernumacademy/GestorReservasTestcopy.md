@@ -24,7 +24,7 @@ import cl.kibernumacademy.servicio.GestorReservas;
 import cl.kibernumacademy.servicio.RepositorioReservas;
 
 @ExtendWith(MockitoExtension.class) 
-public class GestorReservasTestcopy {
+public class GestorReservasTest {
     private Reserva reserva;
     private Cancha cancha;
     

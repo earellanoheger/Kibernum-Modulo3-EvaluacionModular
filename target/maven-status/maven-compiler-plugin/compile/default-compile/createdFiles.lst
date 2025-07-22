@@ -1,0 +1,4 @@
+cl\kibernumacademy\modelo\Cancha.class
+cl\kibernumacademy\modelo\Reserva.class
+cl\kibernumacademy\servicio\RepositorioReservas.class
+cl\kibernumacademy\servicio\GestorReservas.class
