@@ -81,7 +81,7 @@ __________________________________________________________
 
 
 
-# 🧪 Actividad 3: Uso de Mocks con Mockito
+### Actividad 3: Uso de Mocks con Mockito
 
 Este proyecto muestra cómo utilizar **Mockito** para realizar pruebas unitarias en Java, enfocadas en simular el comportamiento de dependencias externas (como un repositorio) mediante **mocks**. 
 
