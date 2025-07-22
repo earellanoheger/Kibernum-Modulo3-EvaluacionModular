@@ -55,6 +55,7 @@ public class GestorReservasTest {
     // Prueba 1: Registrar canchas con nombre, tipo de deporte y horarios disponibles
     @Test
     public void testRegistrarCanchas() {
+        Cancha cancha = new Cancha("Cancha 1", "Fútbol", listaHorarios);
         gestorReservas.registrarCancha(cancha);
         assertTrue(gestorReservas.getCanchas().contains(cancha));
     }
@@ -62,11 +63,7 @@ public class GestorReservasTest {
     // Prueba 2: Crear reserva de canchaas CON MOCKS
     @Test
     public void testCrearReserva() {
-        // gestorReservas.registrarCancha(cancha);
-        // Reserva reserva = new Reserva("Usuario1", cancha.getId(), "2025-01-01","08:00");
-        // gestorReservas.crearReserva(reserva);
-        // assertTrue(gestorReservas.getReservas().contains(reserva));
-      // Given
+        // Given
         given(repositorioMock.obtener()).willReturn(List.of());
 
         Reserva nuevaReserva = new Reserva("Pepe", cancha.getId(), "2025-01-01", "10:00");
@@ -85,35 +82,15 @@ public class GestorReservasTest {
     // Prueba 3: Cancelar una reserva ya creada
     @Test
     public void testCancelarReserva() {
-        /*gestorReservas.registrarCancha(cancha);
-        Reserva reserva = new Reserva("Usuario1", cancha.getId(), "2025-01-01","08:00");
-        gestorReservas.crearReserva(reserva);
-        assertTrue(gestorReservas.getReservas().contains(reserva));
-        gestorReservas.cancelarReserva(reserva);
-        assertFalse(gestorReservas.getReservas().contains(reserva));
-    */
 
         Reserva reserva = new Reserva("Ana", cancha.getId(), "2025-01-01", "09:00");
-        given(repositorioMock.eliminar(reserva)).willReturn(true);
         gestorReservas.cancelarReserva(reserva);
          
-
-        //verify(repositorioMock).eliminar(reserva);
     }
 
     // Prueba 4: Verificar que una cancha no pueda ser reservada si ya está ocupada
     @Test
     public void testReservaCanchasOcupadas() {
-       /* gestorReservas.registrarCancha(cancha);
-        Reserva reserva = new Reserva("Usuario1", cancha.getId(), "2025-01-01","08:00");
-        gestorReservas.crearReserva(reserva);
-        Reserva reserva2 = new Reserva("Usuario1", cancha.getId(), "2025-01-01","08:00");
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            gestorReservas.crearReserva(reserva2);
-        });
-
-        assertEquals("La cancha ya está reservada en este horario", exception.getMessage());
-        */
        // Given: ya hay una reserva para la misma cancha, fecha y hora
         Reserva existente = new Reserva("Juan", cancha.getId(), "2025-01-01", "10:00");
         given(repositorioMock.obtener()).willReturn(List.of(existente));
@@ -123,20 +100,21 @@ public class GestorReservasTest {
         // Then
         assertThrows(IllegalArgumentException.class, () -> gestorReservas.crearReserva(nueva));
         verify(repositorioMock, never()).guardar(any());
-
-    
     }
 
     // Prueba 5: Calcular numero de reservas por dia
     @Test
     public void testCalcularReservasPorDia() {
         gestorReservas.registrarCancha(cancha);
-        gestorReservas.crearReserva(new Reserva("Usuario1", cancha.getId(), "2025-01-01","08:00"));
-        gestorReservas.crearReserva(new Reserva("Usuario1", cancha.getId(), "2025-01-01","09:00"));
-        gestorReservas.crearReserva(new Reserva("Usuario1", cancha.getId(), "2025-01-01","10:00"));
+        Reserva reserva1= new Reserva("Usuario1", cancha.getId(), "2025-01-01","08:00");
+        Reserva reserva2=new Reserva("Usuario1", cancha.getId(), "2025-01-01","09:00");
+        Reserva reserva3=new Reserva("Usuario1", cancha.getId(), "2025-01-01","10:00");
 
+        List<Reserva> reservas = List.of(reserva1, reserva2, reserva3);
+        given(repositorioMock.obtener()).willReturn(reservas);
         long reservasDia1 = gestorReservas.calcularReservasPorDia("2025-01-01");
         assertEquals(3,reservasDia1);
+        verify(repositorioMock).obtener();
         
     }
 }

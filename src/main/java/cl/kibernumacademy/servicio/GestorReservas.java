@@ -7,13 +7,15 @@ import java.util.*;
 public class GestorReservas{
 
     private final RepositorioReservas repositorio;
+    private List<Cancha> canchas;
 
     public GestorReservas(RepositorioReservas repositorio) {
         this.repositorio = repositorio;
+        this.canchas = new ArrayList<>();
     }
 
     // Atributos
-    private List<Cancha> canchas;
+
     //private List<Reserva> reservas;
 
     // Constructor
@@ -34,7 +36,7 @@ public class GestorReservas{
     // Métodos para registrar canchas, crear reservas, cancelar reservas, etc.
     public boolean registrarCancha(Cancha cancha) {
 
-        if (cancha.getNombre() == null  || cancha.getTipoDeporte() == null) {
+        if (cancha==null ||cancha.getNombre() == null  || cancha.getTipoDeporte() == null) {
             throw new IllegalArgumentException("Nombre o tipo de deporte son valores invalidos");
         }
         canchas.add(cancha);
