@@ -82,3 +82,47 @@ __________________________________________________________
 
 
 ### Actividad 3 : Uso de mocks
+
+
+
+### Actividad 4: Medición de cobertura
+
+
+### Actividad 5: : ATDD y aceptación
+
+**Historia de Usuario (modelo INVEST)**
+
+Como usuario del sistema,
+quiero reservar una cancha en un horario específico,
+para asegurarme de que tendré acceso a la cancha cuando lo necesite.
+
+**Criterios de Aceptación**
+
+- La reserva solo es válida si el horario está disponible.
+- Se debe lanzar un error si se intenta reservar un horario ocupado.
+- Se debe poder contar la cantidad de reservas por día.
+
+**Escenario de Prueba (BDD - Gherkin)**
+
+Feature: Gestión de reservas de canchas
+
+  Scenario: Realizar una reserva en un horario disponible
+    Given una cancha con horario disponible a las 10:00
+    When un usuario realiza una reserva para esa hora
+    Then la reserva debe guardarse correctamente
+
+  Scenario: Intentar reservar un horario ya ocupado
+    Given una cancha ya reservada a las 10:00
+    When otro usuario intenta reservar el mismo horario
+    Then se debe lanzar una excepción indicando que el horario está ocupado
+
+
+### Actividad 6: : Comparación entre frameworks de testing
+Esta actividad tiene como objetivo comparar los frameworks de pruebas unitarias JUnit 5 y TestNG, considerando diversos criterios como anotaciones, parametrización, reportes, flexibilidad e integración.
+
+
+
+
+
+
+
