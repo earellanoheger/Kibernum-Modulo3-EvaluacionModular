@@ -116,18 +116,15 @@ Contiene las pruebas que validan funcionalidades como el registro de canchas, cr
 
 ---
 
-## 🖼️ Capturas de pantalla
+## 🖼️ Evidencias de ejecución de pruebas con Mockito y JUnit
 
-Pruebas ejecutadas exitosamente en el entorno de desarrollo:
+Las siguientes capturas muestran el correcto funcionamiento de las pruebas unitarias con uso de mocks (`@Mock`, `@InjectMocks`, `@Captor`), validación de excepciones y resultados en consola utilizando **JUnit 5**:
 
-### 📷 Mock y Captor funcionando
-![MOCKITO](img/MOCKITO1.png)
-
-### 📷 Validación de excepciones y mocks
-![MOCKITO](img/MOCKITO2.png)
-
-### 📷 Resultados en consola (JUnit)
-![MOCKITO](img/MOCKITO3.png)
+<p align="center">
+  <img src="img/MOCKITO1.png" alt="Mock y Captor funcionando" width="300"/>
+  <img src="img/MOCKITO2.png" alt="Validación de excepciones y mocks" width="300"/>
+  <img src="img/MOCKITO3.png" alt="Resultados en consola (JUnit)" width="300"/>
+</p>
 
 ---
 
