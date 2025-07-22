@@ -89,14 +89,14 @@ La clase principal de prueba es `GestorReservasTest.java`, que contiene cinco pr
 
 ---
 
-## 📁 Archivo principal
+### 📁 Archivo principal
 
 - `GestorReservasTest.java`  
 Contiene las pruebas que validan funcionalidades como el registro de canchas, creación y cancelación de reservas, manejo de reservas duplicadas y cálculo de reservas por día.
 
 ---
 
-## ✅ Objetivos de la actividad
+### ✅ Objetivos de la actividad
 
 - Simular dependencias usando `@Mock`.
 - Inyectar dependencias con `@InjectMocks`.
@@ -106,7 +106,7 @@ Contiene las pruebas que validan funcionalidades como el registro de canchas, cr
 
 ---
 
-## 🔍 Funcionalidades probadas
+### 🔍 Funcionalidades probadas
 
 1. Registro de canchas.
 2. Creación de reservas usando un mock de repositorio.
@@ -116,7 +116,7 @@ Contiene las pruebas que validan funcionalidades como el registro de canchas, cr
 
 ---
 
-## 🖼️ Evidencias de ejecución de pruebas con Mockito y JUnit
+### 🖼️ Evidencias de ejecución de pruebas con Mockito y JUnit
 
 A continuación se muestran capturas que evidencian el uso correcto de mocks, capturas de argumentos y verificación de interacciones en las pruebas:
 
