@@ -81,8 +81,55 @@ __________________________________________________________
 
 
 
-### Actividad 3 : Uso de mocks
+# 🧪 Actividad 3: Uso de Mocks con Mockito
 
+Este proyecto muestra cómo utilizar **Mockito** para realizar pruebas unitarias en Java, enfocadas en simular el comportamiento de dependencias externas (como un repositorio) mediante **mocks**. 
+
+La clase principal de prueba es `GestorReservasTest.java`, que contiene cinco pruebas unitarias implementadas con **JUnit 5** y **Mockito**.
+
+---
+
+## 📁 Archivo principal
+
+- `GestorReservasTest.java`  
+Contiene las pruebas que validan funcionalidades como el registro de canchas, creación y cancelación de reservas, manejo de reservas duplicadas y cálculo de reservas por día.
+
+---
+
+## ✅ Objetivos de la actividad
+
+- Simular dependencias usando `@Mock`.
+- Inyectar dependencias con `@InjectMocks`.
+- Capturar argumentos con `@Captor`.
+- Validar interacciones con `verify()` y `never()`.
+- Simular respuestas con `given()` (Behavior-Driven Development).
+
+---
+
+## 🔍 Funcionalidades probadas
+
+1. Registro de canchas.
+2. Creación de reservas usando un mock de repositorio.
+3. Cancelación de reservas.
+4. Prevención de reservas en horarios ya ocupados.
+5. Cálculo del número de reservas por día.
+
+---
+
+## 🖼️ Capturas de pantalla
+
+Pruebas ejecutadas exitosamente en el entorno de desarrollo:
+
+### 📷 Mock y Captor funcionando
+![MOCKITO](img/MOCKITO1.png)
+
+### 📷 Validación de excepciones y mocks
+![MOCKITO](img/MOCKITO2.png)
+
+### 📷 Resultados en consola (JUnit)
+![MOCKITO](img/MOCKITO3.png)
+
+---
 
 
 ### Actividad 4: Medición de cobertura
