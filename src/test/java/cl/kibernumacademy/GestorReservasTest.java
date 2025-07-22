@@ -55,6 +55,7 @@ public class GestorReservasTest {
     // Prueba 1: Registrar canchas con nombre, tipo de deporte y horarios disponibles
     @Test
     public void testRegistrarCanchas() {
+        Cancha cancha = new Cancha("Cancha 1", "Fútbol", listaHorarios);
         gestorReservas.registrarCancha(cancha);
         assertTrue(gestorReservas.getCanchas().contains(cancha));
     }
@@ -94,7 +95,7 @@ public class GestorReservasTest {
     */
 
         Reserva reserva = new Reserva("Ana", cancha.getId(), "2025-01-01", "09:00");
-        given(repositorioMock.eliminar(reserva)).willReturn(true);
+        //given(repositorioMock.eliminar(reserva)).willReturn(true);
         gestorReservas.cancelarReserva(reserva);
          
 
@@ -131,12 +132,15 @@ public class GestorReservasTest {
     @Test
     public void testCalcularReservasPorDia() {
         gestorReservas.registrarCancha(cancha);
-        gestorReservas.crearReserva(new Reserva("Usuario1", cancha.getId(), "2025-01-01","08:00"));
-        gestorReservas.crearReserva(new Reserva("Usuario1", cancha.getId(), "2025-01-01","09:00"));
-        gestorReservas.crearReserva(new Reserva("Usuario1", cancha.getId(), "2025-01-01","10:00"));
+        Reserva reserva1= new Reserva("Usuario1", cancha.getId(), "2025-01-01","08:00");
+        Reserva reserva2=new Reserva("Usuario1", cancha.getId(), "2025-01-01","09:00");
+        Reserva reserva3=new Reserva("Usuario1", cancha.getId(), "2025-01-01","10:00");
 
+        List<Reserva> reservas = List.of(reserva1, reserva2, reserva3);
+        given(repositorioMock.obtener()).willReturn(reservas);
         long reservasDia1 = gestorReservas.calcularReservasPorDia("2025-01-01");
         assertEquals(3,reservasDia1);
+        verify(repositorioMock).obtener();
         
     }
 }
