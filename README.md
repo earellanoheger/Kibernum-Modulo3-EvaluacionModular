@@ -121,7 +121,7 @@ Feature: Gestión de reservas de canchas
 ### Actividad 6: : Comparación entre frameworks de testing
 Esta actividad tiene como objetivo comparar los frameworks de pruebas unitarias JUnit 5 y TestNG, considerando diversos criterios como anotaciones, parametrización, reportes, flexibilidad e integración.
 
-![GREEN](img/Tabla.png)
+![TABLA](img/TABLAS.png)
 
 **Elección Justificada**
 Para este proyecto, se eligió trabajar con JUnit 5 debido a su enfoque moderno, claridad sintáctica y compatibilidad con herramientas actuales como JaCoCo, Mockito y Maven.
