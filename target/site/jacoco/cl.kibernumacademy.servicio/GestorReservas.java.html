@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestorReservas.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">codewave</a> &gt; <a href="index.source.html" class="el_package">cl.kibernumacademy.servicio</a> &gt; <span class="el_source">GestorReservas.java</span></div><h1>GestorReservas.java</h1><pre class="source lang-java linenums">package cl.kibernumacademy.servicio;
+import cl.kibernumacademy.modelo.Cancha;
+import cl.kibernumacademy.modelo.Reserva;
+import java.util.*;
+
+
+public class GestorReservas{
+
+    private final RepositorioReservas repositorio;
+    private List&lt;Cancha&gt; canchas;
+
+<span class="fc" id="L12">    public GestorReservas(RepositorioReservas repositorio) {</span>
+<span class="fc" id="L13">        this.repositorio = repositorio;</span>
+<span class="fc" id="L14">        this.canchas = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L15">    }</span>
+
+    // Atributos
+
+    //private List&lt;Reserva&gt; reservas;
+
+    // Constructor
+    /*public GestorReservas() {
+        this.canchas = new ArrayList&lt;&gt;();
+        this.reservas = new ArrayList&lt;&gt;();
+    }*/
+
+    public List&lt;Cancha&gt; getCanchas() {
+<span class="fc" id="L28">        return List.copyOf(canchas);</span>
+    }
+
+    public List&lt;Reserva&gt; getReservas() {
+        //return List.copyOf(reservas);
+<span class="nc" id="L33">        return repositorio.obtener();</span>
+    }
+    
+    // Métodos para registrar canchas, crear reservas, cancelar reservas, etc.
+    public boolean registrarCancha(Cancha cancha) {
+
+<span class="pc bpc" id="L39" title="3 of 6 branches missed.">        if (cancha==null ||cancha.getNombre() == null  || cancha.getTipoDeporte() == null) {</span>
+<span class="nc" id="L40">            throw new IllegalArgumentException(&quot;Nombre o tipo de deporte son valores invalidos&quot;);</span>
+        }
+<span class="fc" id="L42">        canchas.add(cancha);</span>
+<span class="fc" id="L43">        return true;</span>
+    }
+
+    public void crearReserva(Reserva reserva) {
+<span class="fc" id="L47">        int idCancha = reserva.getIdCancha();</span>
+
+<span class="fc" id="L49">        repositorio.obtener().stream()</span>
+            // Filtrar reservas existentes para la misma cancha, fecha y hora
+<span class="fc" id="L51">            .filter(r -&gt; </span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">                r.getIdCancha() == idCancha </span>
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">                &amp;&amp; r.getFecha().equals(reserva.getFecha()) </span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">                &amp;&amp; r.getHora().equals(reserva.getHora())</span>
+            )
+            // Seleccionar la primera reserva que coincida
+<span class="fc" id="L57">            .findFirst()</span>
+            // Si existe una reserva, lanzar una excepción
+<span class="fc" id="L59">            .ifPresent(r -&gt; {</span>
+<span class="fc" id="L60">                throw new IllegalArgumentException(&quot;La cancha ya está reservada en este horario&quot;);</span>
+            });
+        
+        //reservas.add(reserva);
+<span class="fc" id="L64">        repositorio.guardar(reserva);</span>
+        
+<span class="fc" id="L66">    }</span>
+
+    public void cancelarReserva(Reserva reserva) {
+
+<span class="fc" id="L70">        repositorio.obtener().stream()</span>
+            // Filtrar reservas para encontrar la que coincide con la reserva a cancelar
+<span class="pc bnc" id="L72" title="All 2 branches missed.">            .filter(r -&gt; r.getId() == reserva.getId())</span>
+            // Encontrar la primera coincidencia
+<span class="fc" id="L74">            .findFirst()</span>
+            // Si se encuentra, eliminarla de la lista de reservas
+<span class="pc" id="L76">            .ifPresent(r -&gt; repositorio.eliminar(reserva));</span>
+           // repositorio.eliminar(reserva);
+            
+<span class="fc" id="L79">    }   </span>
+
+    public long calcularReservasPorDia(String fecha){
+<span class="fc" id="L82">        return repositorio.obtener().stream()</span>
+<span class="fc" id="L83">            .filter(r -&gt; r.getFecha().equals(fecha))</span>
+<span class="fc" id="L84">            .count();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
